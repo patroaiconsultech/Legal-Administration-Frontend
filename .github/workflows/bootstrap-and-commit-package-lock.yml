@@ -9,6 +9,7 @@ permissions:
 jobs:
   generate-and-commit:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout current branch
         uses: actions/checkout@v4
@@ -20,13 +21,28 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm
-          cache-dependency-path: package-lock.json
 
-      - name: Generate deterministic lockfile
+      - name: Show branch and files before generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "branch=${GITHUB_REF_NAME}"
+          pwd
+          ls -la
+          test -f package.json
+
+      - name: Generate package-lock.json
         run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
 
-      - name: Validate lockfile
+      - name: Verify lockfile exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f package-lock.json
+          ls -lh package-lock.json
+          sha256sum package-lock.json
+
+      - name: Clean install from generated lockfile
         run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Run frontend tests
@@ -35,16 +51,18 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      - name: Commit package-lock.json
+      - name: Commit and push package-lock.json
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package-lock.json
+
           if git diff --cached --quiet; then
-            echo "package-lock.json already up to date"
+            echo "package-lock.json already committed and up to date"
             exit 0
           fi
+
           git commit -m "chore(frontend): add deterministic package lock"
           git push origin "HEAD:${GITHUB_REF_NAME}"
