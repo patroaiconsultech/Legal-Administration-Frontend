@@ -1,0 +1,50 @@
+name: bootstrap-and-commit-package-lock
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Generate deterministic lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Validate lockfile
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Run frontend tests
+        run: npm test
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Commit package-lock.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          if git diff --cached --quiet; then
+            echo "package-lock.json already up to date"
+            exit 0
+          fi
+          git commit -m "chore(frontend): add deterministic package lock"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
