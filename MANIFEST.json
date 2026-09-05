@@ -1,0 +1,70 @@
+{
+  ".dockerignore": {
+    "bytes": 63,
+    "sha256": "1812070a65abdfc2ed6989c24eb84a87fd5014dafffccdd0c2ad20582d05e5a1"
+  },
+  ".env.example": {
+    "bytes": 369,
+    "sha256": "72f0a52d0be71948a3ff30cb49d697d73975aa91f16a3a29d696b6c168b646d5"
+  },
+  ".github/workflows/bootstrap-package-lock.yml": {
+    "bytes": 616,
+    "sha256": "cb31f550e31d838aeaf72d6663bdd89892c7036ad3211281f627f6ce8daf8c15"
+  },
+  ".github/workflows/ci.yml": {
+    "bytes": 435,
+    "sha256": "2632fe2ababf6ce8787063b07e1d4b3538315bad7892a393608beeb615c678e0"
+  },
+  "Dockerfile": {
+    "bytes": 721,
+    "sha256": "edadedf883075f18fdd697f546dd5da507132a669e243b42c6c945f0d293ab45"
+  },
+  "README.md": {
+    "bytes": 1490,
+    "sha256": "9c5a0813a725e59723e66c3b70215de1a707554ed6c1bba6d1d0cfd0562778d7"
+  },
+  "index.html": {
+    "bytes": 380,
+    "sha256": "5bb61677672034c41acd6645acddfa04736d41f357173f33b07a7d09ef71ed90"
+  },
+  "nginx.conf.template": {
+    "bytes": 315,
+    "sha256": "1846508e924e14513f02fecdff403bc07d2d7743279054d6c6106e1f2a937ac5"
+  },
+  "package.json": {
+    "bytes": 498,
+    "sha256": "246554911d22a03d8892473bcb74d00791dcfd680a47d0c046b2824215811b9c"
+  },
+  "railway.toml": {
+    "bytes": 108,
+    "sha256": "e2bdf2cabcfaa2623ad9f0400bbe845ea9a62818e77ddb0bc9a4e0e2c9e18502"
+  },
+  "src/App.tsx": {
+    "bytes": 13017,
+    "sha256": "5655460d63282a74a56f2293999069dad70975552bc47e409c45cafe54cd915f"
+  },
+  "src/api.ts": {
+    "bytes": 5975,
+    "sha256": "3ca797fa2cded2078554e66db9bb92328c503910a76f6958b078d4e1c409b384"
+  },
+  "src/main.tsx": {
+    "bytes": 305,
+    "sha256": "fd5fdffeb39db319b88383ff91ccfa265ab0768b60abfc3e559f9dc8c2f05f44"
+  },
+  "src/styles.css": {
+    "bytes": 4763,
+    "sha256": "4672c39b89ae37943150753ee0ba02c8d3f966330a943ae8b31b6c8e99d963ec"
+  },
+  "tests/contracts.test.mjs": {
+    "bytes": 2776,
+    "sha256": "6e73660c2540a6ea2f4eb36ec0b553151e57917d7de418f8da83f452c75f1593"
+  },
+  "tsconfig.json": {
+    "bytes": 603,
+    "sha256": "1f21eaf51b1be608d8269003c49d7f512ee3a3570e5eb87110dcd5748e40f4b8"
+  },
+  "vite.config.ts": {
+    "bytes": 179,
+    "sha256": "0fdfd41856dba1c710f759c185258bff7e05333a12a6e5891f8fcdda56056510"
+  }
+}
