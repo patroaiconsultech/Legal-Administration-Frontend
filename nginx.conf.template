@@ -1,6 +1,7 @@
 server {
     listen ${PORT};
     server_name _;
+
     root /usr/share/nginx/html;
     index index.html;
 
@@ -10,6 +11,19 @@ server {
         return 200 '{"status":"ok"}';
     }
 
+    # Canonical Legal frontend path.
+    location = /legal {
+        return 308 /legal/;
+    }
+
+    # Vite was built with base=/legal/.
+    # Strip the public prefix before reading files from dist/.
+    location /legal/ {
+        rewrite ^/legal/(.*)$ /$1 break;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Direct Railway URL remains usable for staging diagnostics.
     location / {
         try_files $uri $uri/ /index.html;
     }
